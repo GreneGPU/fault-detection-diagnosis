@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+scanner="$(git config --get gitleaks.path || printf '%s' gitleaks)"
+if ! command -v "$scanner" >/dev/null 2>&1; then
+  echo "Install Gitleaks before committing: https://github.com/gitleaks/gitleaks" >&2
+  exit 1
+fi
+exec "$scanner" git . --pre-commit --staged --redact --ignore-gitleaks-allow --no-banner

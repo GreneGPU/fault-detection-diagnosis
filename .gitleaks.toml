@@ -1,0 +1,9 @@
+title = "Portfolio secret detection"
+[extend]
+useDefault = true
+
+[[rules]]
+id = "embedded-iot-credentials"
+description = "Hardcoded MQTT or InfluxDB credentials"
+regex = '''(?i)(?:mqtt[\w_]*pass(?:word)?|influx[\w_]*token|\btoken)["']?\s*[:=]\s*["']([^"'\r\n]{6,})["']'''
+secretGroup = 1
